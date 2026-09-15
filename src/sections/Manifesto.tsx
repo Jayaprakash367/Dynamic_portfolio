@@ -51,8 +51,8 @@ const Manifesto: React.FC = () => {
             className="mt-8 text-base sm:text-lg leading-relaxed max-w-2xl"
             style={{ color: '#647e8b' }}
           >
-            Every line of code is a deliberate decision — from loss function selection 
-            to shader optimization. I engineer systems that don't just work, but 
+            Every line of code is a deliberate decision — from loss function selection
+            to shader optimization. I engineer systems that don't just work, but
             perform at the absolute edge of what's possible.
           </p>
         </div>

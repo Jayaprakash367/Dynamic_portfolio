@@ -65,7 +65,7 @@ const CyberTerminal: React.FC<CyberTerminalProps> = ({ isOpen, onClose }) => {
             { type: 'system', content: '' },
             { type: 'output', content: '┌─ AVAILABLE COMMANDS ─────────────────────┐' },
             { type: 'output', content: '│  help      → Show this help menu         │' },
-            { type: 'output', content: '│  projects  → List all 9 builds           │' },
+            { type: 'output', content: '│  projects  → List all projects         │' },
             { type: 'output', content: '│  skills    → Print tech matrix           │' },
             { type: 'output', content: '│  about     → Biography & credentials     │' },
             { type: 'output', content: '│  contact   → Email, GitHub, LinkedIn     │' },

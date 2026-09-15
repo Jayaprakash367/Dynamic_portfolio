@@ -140,29 +140,39 @@ const CircularGallery: React.FC<CircularGalleryProps> = ({ onProjectClick }) => 
                 >
                   {/* Cover */}
                   <div
-                    className="gallery-card-cover"
+                    className="gallery-card-cover relative overflow-hidden"
                     style={{
                       background: `linear-gradient(135deg, ${project.color}33 0%, ${project.color}66 50%, ${project.color}99 100%)`,
                     }}
                   >
-                    <div className="gallery-card-cover-gradient">
-                      {project.title.charAt(0)}
-                    </div>
-                    {/* Decorative circles */}
-                    <div
-                      className="absolute top-4 right-4 w-8 h-8 rounded-full"
-                      style={{
-                        background: `${project.color}40`,
-                        backdropFilter: 'blur(4px)',
-                      }}
-                    />
-                    <div
-                      className="absolute bottom-4 left-4 w-12 h-12 rounded-full"
-                      style={{
-                        background: `${project.color}30`,
-                        backdropFilter: 'blur(4px)',
-                      }}
-                    />
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-center absolute inset-0"
+                      />
+                    ) : (
+                      <>
+                        <div className="gallery-card-cover-gradient">
+                          {project.title.charAt(0)}
+                        </div>
+                        {/* Decorative circles */}
+                        <div
+                          className="absolute top-4 right-4 w-8 h-8 rounded-full"
+                          style={{
+                            background: `${project.color}40`,
+                            backdropFilter: 'blur(4px)',
+                          }}
+                        />
+                        <div
+                          className="absolute bottom-4 left-4 w-12 h-12 rounded-full"
+                          style={{
+                            background: `${project.color}30`,
+                            backdropFilter: 'blur(4px)',
+                          }}
+                        />
+                      </>
+                    )}
                   </div>
 
                   {/* Body */}

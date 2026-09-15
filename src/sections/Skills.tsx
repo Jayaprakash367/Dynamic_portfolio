@@ -60,11 +60,10 @@ const Skills: React.FC = () => {
                 sound.click();
               }}
               onMouseEnter={() => sound.hover()}
-              className={`glass-pill px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
-                activeCategory === cat.id
+              className={`glass-pill px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 ${activeCategory === cat.id
                   ? 'bg-[#334b57] !text-white border-transparent'
                   : ''
-              }`}
+                }`}
               style={{
                 color: activeCategory === cat.id ? '#ffffff' : '#647e8b',
                 backgroundColor: activeCategory === cat.id ? '#334b57' : undefined,
