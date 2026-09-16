@@ -71,12 +71,6 @@ html {
   scrollbar-width: none;
 }
 
-/* ─── Custom Cursor (desktop only) ─── */
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-}
 
 /* ─── Selection ─── */
 ::selection {

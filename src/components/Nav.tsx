@@ -51,7 +51,7 @@ const Nav: React.FC<NavProps> = ({ onToggleTerminal }) => {
             className="text-xl tracking-tight"
             style={{ fontFamily: "'Instrument Serif', serif" }}
           >
-            Velorah
+            Jayaprakash
           </span>
           <sup className="text-[10px] font-sans text-muted-foreground">®</sup>
           <span className="hidden sm:inline-block ml-1 text-xs text-accent-cyan font-mono">✦</span>
