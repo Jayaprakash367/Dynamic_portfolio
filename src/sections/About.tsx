@@ -28,83 +28,77 @@ const About: React.FC = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="section-padding"
-      style={{ backgroundColor: '#ebf1f6' }}
+      className="section-padding relative"
+      style={{ backgroundColor: 'hsl(var(--background))' }}
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="fade-in-up mb-12">
-          <p
-            className="font-mono text-[10px] uppercase tracking-[0.2em] mb-2"
-            style={{ color: '#859ba6' }}
-          >
-            // About
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent-cyan mb-2">
+            // Profile
           </p>
           <h2
-            className="text-3xl sm:text-4xl font-bold"
-            style={{ color: '#45616f' }}
+            className="text-3xl sm:text-4xl md:text-5xl font-normal text-foreground"
+            style={{ fontFamily: "'Instrument Serif', serif" }}
           >
-            The Engineer Behind the Code
+            The Engineer Behind the Systems
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Left: Photo card */}
+          {/* Left: Identity Card */}
           <div className="fade-in-up">
-            <div className="glass-card glow-brackets p-6 sm:p-8">
-              {/* Studio photo placeholder */}
+            <div className="liquid-glass glow-brackets p-6 sm:p-8 rounded-2xl border border-white/10">
+              {/* Studio photo/monogram centerpiece */}
               <div
                 className="w-full aspect-[4/5] rounded-xl mb-6 flex items-center justify-center relative overflow-hidden"
                 style={{
-                  background: 'linear-gradient(135deg, #334b57 0%, #45616f 50%, #5e8896 100%)',
+                  background: 'linear-gradient(135deg, #011933 0%, #002b54 50%, #02417a 100%)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                 }}
               >
                 {/* Initials */}
-                <span
-                  className="text-6xl sm:text-7xl font-black select-none"
-                  style={{ color: 'rgba(255, 255, 255, 0.2)' }}
-                >
+                <span className="text-7xl sm:text-8xl font-black select-none text-white/10 font-mono tracking-tighter">
                   JP
                 </span>
-                {/* Decorative elements */}
+
+                {/* Ambient glow accent */}
                 <div
-                  className="absolute top-6 right-6 w-16 h-16 rounded-full"
-                  style={{ background: 'rgba(56, 189, 248, 0.15)' }}
+                  className="absolute top-6 right-6 w-20 h-20 rounded-full blur-xl"
+                  style={{ background: 'rgba(56, 189, 248, 0.2)' }}
                 />
                 <div
-                  className="absolute bottom-8 left-8 w-24 h-24 rounded-full"
-                  style={{ background: 'rgba(56, 189, 248, 0.1)' }}
+                  className="absolute bottom-8 left-8 w-32 h-32 rounded-full blur-2xl"
+                  style={{ background: 'rgba(2, 132, 199, 0.25)' }}
                 />
+
                 {/* Name overlay */}
-                <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/40 to-transparent">
-                  <p className="font-mono text-xs text-white/80 uppercase tracking-wider">
+                <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                  <p className="font-mono text-sm text-white uppercase tracking-wider font-semibold">
                     {profile.name}
                   </p>
-                  <p className="font-mono text-[10px] text-white/50 uppercase tracking-wider mt-1">
+                  <p className="font-mono text-xs text-accent-cyan uppercase tracking-wider mt-1">
                     {profile.title}
                   </p>
                 </div>
               </div>
 
               {/* Quick info */}
-              <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-6 flex-wrap text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <MapPinIcon size={14} className="text-[#859ba6]" />
-                  <span
-                    className="font-mono text-xs"
-                    style={{ color: '#647e8b' }}
-                  >
+                  <MapPinIcon size={14} className="text-accent-cyan" />
+                  <span className="font-mono text-xs text-slate-300">
                     {profile.location}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MailIcon size={14} className="text-[#859ba6]" />
-                  <span
-                    className="font-mono text-xs"
-                    style={{ color: '#647e8b' }}
+                  <MailIcon size={14} className="text-accent-cyan" />
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="font-mono text-xs text-slate-300 hover:text-white transition-colors"
                   >
                     {profile.email}
-                  </span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -113,26 +107,23 @@ const About: React.FC = () => {
           {/* Right: Bio & Education */}
           <div className="flex flex-col gap-6">
             {/* Bio */}
-            <div className="fade-in-up glass-card p-6 sm:p-8">
+            <div className="fade-in-up liquid-glass p-6 sm:p-8 rounded-2xl border border-white/10">
               <h3
-                className="text-lg font-bold mb-4"
-                style={{ color: '#45616f' }}
+                className="text-xl font-normal mb-4 text-foreground"
+                style={{ fontFamily: "'Instrument Serif', serif" }}
               >
                 Biography
               </h3>
-              <p
-                className="leading-relaxed"
-                style={{ color: '#647e8b' }}
-              >
+              <p className="leading-relaxed text-muted-foreground font-body text-sm sm:text-base">
                 {profile.bio}
               </p>
             </div>
 
             {/* Education timeline */}
-            <div className="fade-in-up glass-card p-6 sm:p-8">
+            <div className="fade-in-up liquid-glass p-6 sm:p-8 rounded-2xl border border-white/10">
               <h3
-                className="text-lg font-bold mb-6"
-                style={{ color: '#45616f' }}
+                className="text-xl font-normal mb-6 text-foreground"
+                style={{ fontFamily: "'Instrument Serif', serif" }}
               >
                 Education & Credentials
               </h3>
@@ -142,37 +133,22 @@ const About: React.FC = () => {
                   key={i}
                   className="relative pl-6 pb-6 last:pb-0"
                   style={{
-                    borderLeft: '2px solid rgba(56, 189, 248, 0.2)',
+                    borderLeft: '2px solid rgba(56, 189, 248, 0.25)',
                   }}
                 >
                   {/* Timeline dot */}
-                  <div
-                    className="absolute left-[-5px] top-1 w-2 h-2 rounded-full"
-                    style={{ backgroundColor: '#38bdf8' }}
-                  />
+                  <div className="absolute left-[-5px] top-1.5 w-2 h-2 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
 
-                  <p
-                    className="font-mono text-[10px] uppercase tracking-wider mb-1"
-                    style={{ color: '#38bdf8' }}
-                  >
+                  <p className="font-mono text-[10px] uppercase tracking-wider mb-1 text-accent-cyan">
                     {edu.year}
                   </p>
-                  <h4
-                    className="font-semibold"
-                    style={{ color: '#45616f' }}
-                  >
+                  <h4 className="font-semibold text-white">
                     {edu.degree}
                   </h4>
-                  <p
-                    className="text-sm mt-1"
-                    style={{ color: '#5e8896' }}
-                  >
+                  <p className="text-sm mt-1 text-slate-300">
                     {edu.institution}
                   </p>
-                  <p
-                    className="text-sm mt-2 leading-relaxed"
-                    style={{ color: '#647e8b' }}
-                  >
+                  <p className="text-xs sm:text-sm mt-2 leading-relaxed text-muted-foreground">
                     {edu.details}
                   </p>
                 </div>
@@ -181,18 +157,18 @@ const About: React.FC = () => {
 
             {/* Download Resume CTA */}
             <div className="fade-in-up">
-              <button
+              <a
+                href="#contact"
                 onClick={() => {
                   sound.success();
                 }}
                 onMouseEnter={() => sound.hover()}
-                className="glass-pill px-6 py-3 font-mono text-xs uppercase tracking-wider flex items-center gap-2 transition-all duration-300 hover:border-[rgba(59,89,102,0.35)]"
-                style={{ color: '#334b57' }}
+                className="liquid-glass inline-flex items-center gap-2 px-6 py-3 rounded-full font-mono text-xs uppercase tracking-wider text-white hover:scale-[1.03] transition-all cursor-pointer font-medium"
                 data-cursor="interactive"
               >
-                <DownloadIcon size={14} />
-                Download Resume
-              </button>
+                <DownloadIcon size={14} className="text-accent-cyan" />
+                <span>Download Resume</span>
+              </a>
             </div>
           </div>
         </div>

@@ -131,7 +131,7 @@ const HorizontalWorks: React.FC = () => {
       ref={sectionRef}
       className="relative text-left"
       style={{
-        backgroundColor: '#ebf1f6',
+        backgroundColor: 'hsl(var(--background))',
         // In reel mode, create enough scrollable height so user scrolls smoothly through all projects
         minHeight: viewMode === 'reel' ? `${(totalProjects + 0.8) * 100}vh` : 'auto',
       }}
@@ -149,20 +149,17 @@ const HorizontalWorks: React.FC = () => {
         <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4 z-20">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="inline-block w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
-              <p
-                className="font-mono text-[11px] uppercase tracking-[0.25em] font-semibold"
-                style={{ color: '#0284c7' }}
-              >
-                // Featured Builds & Research Labs
+              <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] font-semibold text-accent-cyan">
+                // Selected Architecture &amp; Labs
               </p>
             </div>
             <h2
-              className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight"
-              style={{ color: '#334b57' }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-foreground"
+              style={{ fontFamily: "'Instrument Serif', serif" }}
             >
-              Selected Systems
-              <span className="text-cyan-500 ml-2">.</span>
+              Featured Works
+              <span className="text-accent-cyan ml-2">.</span>
             </h2>
           </div>
 
@@ -176,8 +173,8 @@ const HorizontalWorks: React.FC = () => {
                   setViewMode('reel');
                 }}
                 className={`px-3 py-1 rounded-full font-mono text-[10px] uppercase tracking-wider flex items-center gap-1.5 transition-all duration-300 ${viewMode === 'reel'
-                    ? 'bg-cyan-500 text-white shadow-sm'
-                    : 'text-[#647e8b] hover:text-[#334b57]'
+                  ? 'bg-cyan-500 text-white shadow-sm'
+                  : 'text-[#647e8b] hover:text-[#334b57]'
                   }`}
                 data-cursor="interactive"
                 title="Cinematic Scroll Reel"
@@ -191,8 +188,8 @@ const HorizontalWorks: React.FC = () => {
                   setViewMode('grid');
                 }}
                 className={`px-3 py-1 rounded-full font-mono text-[10px] uppercase tracking-wider flex items-center gap-1.5 transition-all duration-300 ${viewMode === 'grid'
-                    ? 'bg-cyan-500 text-white shadow-sm'
-                    : 'text-[#647e8b] hover:text-[#334b57]'
+                  ? 'bg-cyan-500 text-white shadow-sm'
+                  : 'text-[#647e8b] hover:text-[#334b57]'
                   }`}
                 data-cursor="interactive"
                 title="All Projects Grid"
@@ -213,8 +210,8 @@ const HorizontalWorks: React.FC = () => {
                       onClick={() => jumpToProject(idx)}
                       onMouseEnter={() => sound.hover()}
                       className={`px-2.5 py-1 rounded-full font-mono text-[10px] uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${isActive
-                          ? 'bg-white text-[#334b57] font-bold shadow-sm'
-                          : 'text-[#647e8b] hover:text-[#334b57]'
+                        ? 'bg-white text-[#334b57] font-bold shadow-sm'
+                        : 'text-[#647e8b] hover:text-[#334b57]'
                         }`}
                       data-cursor="interactive"
                     >
@@ -289,8 +286,8 @@ const HorizontalWorks: React.FC = () => {
                     {/* Main Project Canvas Card */}
                     <div
                       className={`relative w-full max-w-6xl mx-auto rounded-3xl p-6 sm:p-8 lg:p-10 transition-all duration-500 backdrop-blur-xl border ${isActive
-                          ? 'bg-white/80 shadow-[0_20px_70px_rgba(56,189,248,0.18)] border-white/90 scale-100 opacity-100'
-                          : 'bg-white/40 shadow-sm border-white/40 scale-[0.97] opacity-60'
+                        ? 'liquid-glass bg-white/[0.04] shadow-[0_20px_70px_rgba(56,189,248,0.15)] border-white/20 scale-100 opacity-100'
+                        : 'liquid-glass bg-white/[0.02] shadow-sm border-white/10 scale-[0.97] opacity-60'
                         }`}
                       style={{
                         minHeight: '480px',
@@ -298,7 +295,7 @@ const HorizontalWorks: React.FC = () => {
                     >
                       {/* Giant Subtle Background Index */}
                       <span
-                        className="absolute -top-6 right-6 select-none font-black font-mono text-7xl sm:text-9xl lg:text-[11rem] opacity-[0.06] pointer-events-none transition-all duration-700"
+                        className="absolute -top-6 right-6 select-none font-black font-mono text-7xl sm:text-9xl lg:text-[11rem] opacity-[0.08] pointer-events-none transition-all duration-700"
                         style={{ color: project.color }}
                       >
                         0{idx + 1}
@@ -325,27 +322,21 @@ const HorizontalWorks: React.FC = () => {
                                 {project.badge || project.category}
                               </span>
 
-                              <span
-                                className="glass-pill px-2.5 py-0.5 font-mono text-[10px] tracking-wider"
-                                style={{ color: '#859ba6' }}
-                              >
+                              <span className="liquid-glass px-2.5 py-0.5 font-mono text-[10px] tracking-wider text-slate-400 rounded-full">
                                 BUILD 0{idx + 1} / 0{totalProjects}
                               </span>
                             </div>
 
                             {/* Project Title */}
                             <h3
-                              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mt-1"
-                              style={{ color: '#334b57' }}
+                              className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white mt-1"
+                              style={{ fontFamily: "'Instrument Serif', serif" }}
                             >
                               {project.title}
                             </h3>
 
                             {/* Description */}
-                            <p
-                              className="mt-3 text-sm sm:text-base leading-relaxed"
-                              style={{ color: '#5e8896' }}
-                            >
+                            <p className="mt-3 text-sm sm:text-base leading-relaxed text-muted-foreground font-body">
                               {project.description}
                             </p>
 
@@ -355,7 +346,7 @@ const HorizontalWorks: React.FC = () => {
                                 {project.stats.map((st, sIdx) => (
                                   <div
                                     key={sIdx}
-                                    className="p-2.5 rounded-2xl bg-white/70 border border-slate-200/60 shadow-xs hover:border-cyan-300 transition-colors"
+                                    className="p-2.5 rounded-2xl liquid-glass border border-white/10 hover:border-cyan-400/40 transition-colors"
                                   >
                                     <div
                                       className="font-mono text-xs sm:text-sm font-black tracking-tight"
@@ -363,10 +354,7 @@ const HorizontalWorks: React.FC = () => {
                                     >
                                       {st.value}
                                     </div>
-                                    <div
-                                      className="text-[9px] sm:text-[10px] uppercase font-mono tracking-wider truncate mt-0.5"
-                                      style={{ color: '#859ba6' }}
-                                    >
+                                    <div className="text-[9px] sm:text-[10px] uppercase font-mono tracking-wider truncate mt-0.5 text-slate-400">
                                       {st.label}
                                     </div>
                                   </div>
@@ -381,9 +369,9 @@ const HorizontalWorks: React.FC = () => {
                                   key={tag}
                                   className="px-2.5 py-1 rounded-lg font-mono text-[11px] font-medium transition-all duration-200 hover:scale-105"
                                   style={{
-                                    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                                    color: '#45616f',
-                                    border: '1px solid rgba(74, 99, 111, 0.15)',
+                                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                                    color: '#e2e8f0',
+                                    border: '1px solid rgba(255, 255, 255, 0.1)',
                                   }}
                                 >
                                   {tag}
@@ -393,17 +381,14 @@ const HorizontalWorks: React.FC = () => {
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="flex flex-wrap items-center gap-3 mt-8 pt-4 border-t border-slate-200/60">
+                          <div className="flex flex-wrap items-center gap-3 mt-8 pt-4 border-t border-white/10">
                             <button
                               onClick={() => {
                                 sound.click();
                                 setSelectedProject(project);
                               }}
                               onMouseEnter={() => sound.hover()}
-                              className="px-5 py-2.5 rounded-full font-mono text-xs uppercase font-bold tracking-wider flex items-center gap-2 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-                              style={{
-                                backgroundColor: '#334b57',
-                              }}
+                              className="liquid-glass px-5 py-2.5 rounded-full font-mono text-xs uppercase font-bold tracking-wider flex items-center gap-2 text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
                               data-cursor="interactive"
                             >
                               <Sparkles size={14} className="text-cyan-400" />
@@ -417,7 +402,7 @@ const HorizontalWorks: React.FC = () => {
                                 rel="noopener noreferrer"
                                 onClick={() => sound.click()}
                                 onMouseEnter={() => sound.hover()}
-                                className="glass-pill px-4 py-2.5 font-mono text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#334b57] hover:bg-white hover:text-black transition-all"
+                                className="liquid-glass px-4 py-2.5 font-mono text-xs uppercase tracking-wider flex items-center gap-1.5 text-slate-300 hover:text-white rounded-full transition-all cursor-pointer"
                                 data-cursor="interactive"
                               >
                                 <GithubIcon size={14} />
@@ -531,22 +516,22 @@ const HorizontalWorks: React.FC = () => {
                   setSelectedProject(project);
                 }}
                 onMouseEnter={() => sound.hover()}
-                className="group glass-card overflow-hidden hover-lift p-6 transition-all duration-300 border border-white/80 hover:border-cyan-400 bg-white/70"
+                className="group liquid-glass overflow-hidden hover-lift p-6 transition-all duration-300 border border-white/10 hover:border-cyan-400/50 rounded-3xl cursor-pointer"
                 data-cursor="interactive"
               >
                 {/* Browser Frame */}
-                <div className="rounded-2xl overflow-hidden shadow-md mb-6 border border-slate-200">
-                  <div className="bg-slate-900 px-3 py-2 flex items-center justify-between">
+                <div className="rounded-2xl overflow-hidden shadow-md mb-6 border border-white/10">
+                  <div className="bg-black/60 px-3 py-2 flex items-center justify-between border-b border-white/10">
                     <div className="flex gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                     </div>
                     <span className="font-mono text-[9px] text-slate-400">
                       0{idx + 1} // {project.title}
                     </span>
                   </div>
-                  <div className="aspect-video relative overflow-hidden bg-slate-900">
+                  <div className="aspect-video relative overflow-hidden bg-slate-950">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -559,9 +544,9 @@ const HorizontalWorks: React.FC = () => {
                   <span
                     className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full"
                     style={{
-                      backgroundColor: `${project.color}15`,
+                      backgroundColor: `${project.color}20`,
                       color: project.color,
-                      border: `1px solid ${project.color}30`,
+                      border: `1px solid ${project.color}40`,
                     }}
                   >
                     {project.category}
@@ -569,10 +554,10 @@ const HorizontalWorks: React.FC = () => {
                   <span className="font-mono text-[10px] text-slate-400">{project.year}</span>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#334b57] group-hover:text-cyan-600 transition-colors">
+                <h3 className="text-xl font-normal text-white group-hover:text-cyan-300 transition-colors" style={{ fontFamily: "'Instrument Serif', serif" }}>
                   {project.title}
                 </h3>
-                <p className="text-sm text-[#647e8b] mt-2 line-clamp-2 leading-relaxed">
+                <p className="text-sm text-muted-foreground mt-2 line-clamp-2 leading-relaxed font-body">
                   {project.description}
                 </p>
 
@@ -581,14 +566,14 @@ const HorizontalWorks: React.FC = () => {
                   {project.tags.slice(0, 4).map((t) => (
                     <span
                       key={t}
-                      className="font-mono text-[10px] px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200"
+                      className="font-mono text-[10px] px-2 py-0.5 rounded-lg bg-white/[0.05] text-slate-300 border border-white/10"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs font-mono font-bold text-cyan-600">
+                <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono font-bold text-accent-cyan">
                   <span>Explore Details</span>
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -599,28 +584,28 @@ const HorizontalWorks: React.FC = () => {
 
         {/* ─── HUD BOTTOM PROGRESS & CONTROLS ─── */}
         {viewMode === 'reel' && (
-          <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-300/40 z-20">
+          <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/10 z-20">
             {/* Scroll Progress Bar */}
             <div className="w-full sm:w-1/2 flex items-center gap-3">
-              <span className="font-mono text-[10px] font-bold uppercase text-[#859ba6] shrink-0">
+              <span className="font-mono text-[10px] font-bold uppercase text-slate-400 shrink-0">
                 01 START
               </span>
-              <div className="relative w-full h-1.5 bg-slate-300/50 rounded-full overflow-hidden">
+              <div className="relative w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <div
                   className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transition-all duration-300"
                   style={{ width: `${Math.max(8, scrollProgress * 100)}%` }}
                 />
               </div>
-              <span className="font-mono text-[10px] font-bold uppercase text-[#859ba6] shrink-0">
+              <span className="font-mono text-[10px] font-bold uppercase text-slate-400 shrink-0">
                 0{totalProjects} END
               </span>
             </div>
 
             {/* Scroll Hint Ticker */}
-            <div className="flex items-center gap-2 text-[#647e8b] font-mono text-[11px]">
+            <div className="flex items-center gap-2 text-muted-foreground font-mono text-[11px]">
               <span className="hidden sm:inline">Scroll down or swipe to journey through works</span>
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-              <span className="font-bold text-[#334b57]">
+              <span className="font-bold text-white">
                 {String(Math.round(scrollProgress * 100)).padStart(2, '0')}%
               </span>
             </div>
@@ -633,18 +618,18 @@ const HorizontalWorks: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
           {/* Dark Glass Backdrop */}
           <div
-            className="fixed inset-0 bg-slate-950/70 backdrop-blur-md transition-opacity animate-fade-in"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity animate-fade-in"
             onClick={() => setSelectedProject(null)}
           />
 
           {/* Modal Card */}
-          <div className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden z-10 my-auto border border-slate-200 animate-scale-up">
+          <div className="relative w-full max-w-4xl bg-[#00172e] rounded-3xl shadow-2xl overflow-hidden z-10 my-auto border border-white/20 animate-scale-up text-white">
             {/* Modal Header */}
             <div
               className="relative px-6 sm:px-8 py-6 flex flex-col justify-between"
               style={{
-                background: `linear-gradient(135deg, ${selectedProject.color}15 0%, #ffffff 100%)`,
-                borderBottom: '1px solid rgba(0,0,0,0.06)',
+                background: `linear-gradient(135deg, ${selectedProject.color}25 0%, #00172e 100%)`,
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
               }}
             >
               <div className="flex items-center justify-between gap-4 mb-3">
@@ -666,7 +651,7 @@ const HorizontalWorks: React.FC = () => {
 
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
+                  className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                   data-cursor="interactive"
                   aria-label="Close modal"
                 >
@@ -674,42 +659,42 @@ const HorizontalWorks: React.FC = () => {
                 </button>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-black text-[#334b57]">
+              <h2 className="text-2xl sm:text-3xl font-normal text-white" style={{ fontFamily: "'Instrument Serif', serif" }}>
                 {selectedProject.title}
               </h2>
             </div>
 
             {/* Modal Interactive Image Preview Banner */}
-            <div className="relative bg-slate-950 w-full overflow-hidden max-h-[380px] border-b border-slate-200">
+            <div className="relative bg-slate-950 w-full overflow-hidden max-h-[380px] border-b border-white/10">
               <img
                 src={selectedProject.image}
                 alt={selectedProject.title}
                 className="w-full h-full object-cover object-center"
               />
-              <div className="absolute bottom-3 right-4 glass-pill px-3 py-1 font-mono text-[10px] text-white bg-black/60 border-white/20">
+              <div className="absolute bottom-3 right-4 liquid-glass px-3 py-1 font-mono text-[10px] text-white rounded-full border border-white/20">
                 Verified Production Asset
               </div>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="flex items-center px-6 sm:px-8 border-b border-slate-200 bg-slate-50/70 gap-2 sm:gap-4 overflow-x-auto">
+            <div className="flex items-center px-6 sm:px-8 border-b border-white/10 bg-black/40 gap-2 sm:gap-4 overflow-x-auto">
               <button
                 onClick={() => setActiveModalTab('overview')}
-                className={`py-3.5 px-3 font-mono text-xs uppercase font-bold tracking-wider border-b-2 transition-all flex items-center gap-2 ${activeModalTab === 'overview'
-                    ? 'border-cyan-500 text-cyan-700 bg-white/50'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
+                className={`py-3.5 px-3 font-mono text-xs uppercase font-bold tracking-wider border-b-2 transition-all flex items-center gap-2 cursor-pointer ${activeModalTab === 'overview'
+                  ? 'border-cyan-400 text-cyan-300 bg-white/5'
+                  : 'border-transparent text-slate-400 hover:text-white'
                   }`}
                 data-cursor="interactive"
               >
                 <Layers size={14} />
-                <span>Overview & Purpose</span>
+                <span>Overview &amp; Purpose</span>
               </button>
 
               <button
                 onClick={() => setActiveModalTab('features')}
-                className={`py-3.5 px-3 font-mono text-xs uppercase font-bold tracking-wider border-b-2 transition-all flex items-center gap-2 ${activeModalTab === 'features'
-                    ? 'border-cyan-500 text-cyan-700 bg-white/50'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
+                className={`py-3.5 px-3 font-mono text-xs uppercase font-bold tracking-wider border-b-2 transition-all flex items-center gap-2 cursor-pointer ${activeModalTab === 'features'
+                  ? 'border-cyan-400 text-cyan-300 bg-white/5'
+                  : 'border-transparent text-slate-400 hover:text-white'
                   }`}
                 data-cursor="interactive"
               >
@@ -719,14 +704,14 @@ const HorizontalWorks: React.FC = () => {
 
               <button
                 onClick={() => setActiveModalTab('telemetry')}
-                className={`py-3.5 px-3 font-mono text-xs uppercase font-bold tracking-wider border-b-2 transition-all flex items-center gap-2 ${activeModalTab === 'telemetry'
-                    ? 'border-cyan-500 text-cyan-700 bg-white/50'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
+                className={`py-3.5 px-3 font-mono text-xs uppercase font-bold tracking-wider border-b-2 transition-all flex items-center gap-2 cursor-pointer ${activeModalTab === 'telemetry'
+                  ? 'border-cyan-400 text-cyan-300 bg-white/5'
+                  : 'border-transparent text-slate-400 hover:text-white'
                   }`}
                 data-cursor="interactive"
               >
                 <Activity size={14} />
-                <span>Metrics & Telemetry</span>
+                <span>Metrics &amp; Telemetry</span>
               </button>
             </div>
 
@@ -734,19 +719,19 @@ const HorizontalWorks: React.FC = () => {
             <div className="p-6 sm:p-8 max-h-[45vh] overflow-y-auto">
               {activeModalTab === 'overview' && (
                 <div className="space-y-4">
-                  <p className="text-base text-slate-700 leading-relaxed">
+                  <p className="text-base text-slate-200 leading-relaxed font-body">
                     {selectedProject.longDescription}
                   </p>
 
                   <div className="pt-4">
-                    <h4 className="font-mono text-xs uppercase font-bold text-slate-500 tracking-wider mb-2">
-                      Target Technologies & Frameworks
+                    <h4 className="font-mono text-xs uppercase font-bold text-slate-400 tracking-wider mb-2">
+                      Target Technologies &amp; Frameworks
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1.5 rounded-xl font-mono text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200"
+                          className="px-3 py-1.5 rounded-xl font-mono text-xs font-semibold bg-white/[0.05] text-slate-200 border border-white/10"
                         >
                           {tag}
                         </span>
@@ -758,13 +743,13 @@ const HorizontalWorks: React.FC = () => {
 
               {activeModalTab === 'features' && (
                 <div className="space-y-3">
-                  <h4 className="font-mono text-xs uppercase font-bold text-slate-500 tracking-wider mb-2">
-                    Key Innovations & Architecture
+                  <h4 className="font-mono text-xs uppercase font-bold text-slate-400 tracking-wider mb-2">
+                    Key Innovations &amp; Architecture
                   </h4>
                   {selectedProject.features?.map((feat, fIdx) => (
                     <div
                       key={fIdx}
-                      className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3"
+                      className="p-3.5 rounded-2xl liquid-glass border border-white/10 flex items-start gap-3"
                     >
                       <div
                         className="p-1.5 rounded-lg mt-0.5"
@@ -775,7 +760,7 @@ const HorizontalWorks: React.FC = () => {
                       >
                         <Sparkles size={14} />
                       </div>
-                      <p className="text-sm text-slate-700 leading-normal">{feat}</p>
+                      <p className="text-sm text-slate-200 leading-normal">{feat}</p>
                     </div>
                   ))}
                 </div>
@@ -787,7 +772,7 @@ const HorizontalWorks: React.FC = () => {
                     {selectedProject.stats?.map((stat, sIdx) => (
                       <div
                         key={sIdx}
-                        className="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-center"
+                        className="p-5 rounded-2xl liquid-glass border border-white/10 text-center"
                       >
                         <div
                           className="font-mono text-2xl sm:text-3xl font-black"
@@ -795,15 +780,15 @@ const HorizontalWorks: React.FC = () => {
                         >
                           {stat.value}
                         </div>
-                        <div className="text-xs uppercase font-mono text-slate-500 mt-1">
+                        <div className="text-xs uppercase font-mono text-slate-400 mt-1">
                           {stat.label}
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-cyan-50/50 border border-cyan-200 text-xs text-cyan-900 flex items-center gap-3">
-                    <Terminal size={16} className="text-cyan-600 shrink-0" />
+                  <div className="p-4 rounded-2xl liquid-glass border border-cyan-400/20 text-xs text-cyan-200 flex items-center gap-3">
+                    <Terminal size={16} className="text-cyan-400 shrink-0" />
                     <span>
                       Performance benchmarks measured on standard desktop target configurations. Zero frame drops recorded across active interaction sequences.
                     </span>
@@ -813,9 +798,9 @@ const HorizontalWorks: React.FC = () => {
             </div>
 
             {/* Modal Footer CTAs */}
-            <div className="px-6 sm:px-8 py-5 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
-              <div className="font-mono text-xs text-slate-500">
-                Project Code: <span className="font-bold text-slate-700">{selectedProject.title}</span>
+            <div className="px-6 sm:px-8 py-5 bg-black/40 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+              <div className="font-mono text-xs text-slate-400">
+                Project Code: <span className="font-bold text-white">{selectedProject.title}</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -825,7 +810,7 @@ const HorizontalWorks: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.click()}
-                    className="px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 bg-slate-900 text-white hover:bg-slate-800 transition-colors"
+                    className="liquid-glass px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 text-white hover:scale-105 transition-all"
                     data-cursor="interactive"
                   >
                     <GithubIcon size={14} />
@@ -838,7 +823,7 @@ const HorizontalWorks: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.click()}
-                    className="px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 text-white transition-colors"
+                    className="px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 text-white hover:scale-105 transition-all shadow-md"
                     style={{ backgroundColor: selectedProject.color }}
                     data-cursor="interactive"
                   >

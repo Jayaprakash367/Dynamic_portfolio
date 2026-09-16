@@ -30,21 +30,18 @@ const Skills: React.FC = () => {
     <section
       id="skills"
       ref={sectionRef}
-      className="section-padding"
-      style={{ backgroundColor: '#f2f6f9' }}
+      className="section-padding relative"
+      style={{ backgroundColor: 'hsl(var(--background))' }}
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="fade-in-up">
-          <p
-            className="font-mono text-[10px] uppercase tracking-[0.2em] mb-2"
-            style={{ color: '#859ba6' }}
-          >
-            // Technical Skills
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent-cyan mb-2">
+            // Core Capabilities
           </p>
           <h2
-            className="text-3xl sm:text-4xl font-bold"
-            style={{ color: '#45616f' }}
+            className="text-3xl sm:text-4xl md:text-5xl font-normal text-foreground"
+            style={{ fontFamily: "'Instrument Serif', serif" }}
           >
             Engineering Matrix
           </h2>
@@ -60,17 +57,14 @@ const Skills: React.FC = () => {
                 sound.click();
               }}
               onMouseEnter={() => sound.hover()}
-              className={`glass-pill px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 ${activeCategory === cat.id
-                  ? 'bg-[#334b57] !text-white border-transparent'
-                  : ''
-                }`}
-              style={{
-                color: activeCategory === cat.id ? '#ffffff' : '#647e8b',
-                backgroundColor: activeCategory === cat.id ? '#334b57' : undefined,
-              }}
+              className={`px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeCategory === cat.id
+                  ? 'bg-white/20 text-white font-semibold border border-cyan-400/50 shadow-[0_0_15px_rgba(56,189,248,0.2)]'
+                  : 'liquid-glass text-muted-foreground hover:text-white border border-white/10'
+              }`}
               data-cursor="interactive"
             >
-              <span style={{ color: activeCategory === cat.id ? '#38bdf8' : '#859ba6' }}>
+              <span className={activeCategory === cat.id ? 'text-accent-cyan' : 'text-slate-400'}>
                 {cat.index}
               </span>{' '}
               {cat.label}
@@ -83,7 +77,7 @@ const Skills: React.FC = () => {
           {currentCategory.skills.map((skill, i) => (
             <div
               key={`${activeCategory}-${skill}`}
-              className="glass-card p-4 sm:p-5 hover-lift group"
+              className="liquid-glass p-4 sm:p-5 hover-lift group rounded-2xl border border-white/10"
               onMouseEnter={() => sound.hover()}
               data-cursor="interactive"
               style={{
@@ -91,35 +85,30 @@ const Skills: React.FC = () => {
                 animation: `fadeInUp 0.4s ease forwards ${i * 0.06}s`,
               }}
             >
-              {/* Skill icon placeholder — decorative gradient dot */}
+              {/* Skill icon badge */}
               <div
                 className="w-8 h-8 rounded-lg mb-3 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(2, 132, 199, 0.2))',
+                  background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(2, 132, 199, 0.3))',
+                  border: '1px solid rgba(56, 189, 248, 0.3)',
                 }}
               >
-                <span
-                  className="font-mono text-xs font-bold"
-                  style={{ color: '#38bdf8' }}
-                >
+                <span className="font-mono text-xs font-bold text-accent-cyan">
                   {skill.charAt(0)}
                 </span>
               </div>
-              <p
-                className="font-semibold text-sm"
-                style={{ color: '#45616f' }}
-              >
+              <p className="font-medium text-sm text-foreground group-hover:text-cyan-300 transition-colors">
                 {skill}
               </p>
               <div
-                className="mt-2 h-1 rounded-full overflow-hidden"
-                style={{ backgroundColor: 'rgba(74, 99, 111, 0.1)' }}
+                className="mt-3 h-1 rounded-full overflow-hidden"
+                style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
               >
                 <div
                   className="h-full rounded-full transition-all duration-700 group-hover:w-full"
                   style={{
                     width: '0%',
-                    background: 'linear-gradient(90deg, #38bdf8, #0284c7)',
+                    background: 'linear-gradient(90deg, #38bdf8, #a5f3fc)',
                     animation: `growBar 0.8s ease forwards ${0.3 + i * 0.06}s`,
                   }}
                 />
@@ -136,7 +125,7 @@ const Skills: React.FC = () => {
           }
           @keyframes growBar {
             from { width: 0%; }
-            to { width: ${70 + Math.random() * 30}%; }
+            to { width: ${75 + (activeCategory.charCodeAt(0) % 20)}%; }
           }
         `}</style>
       </div>

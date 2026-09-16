@@ -1,100 +1,205 @@
-import { sound } from '../lib/audio'
-import { scrollLenisTo } from '../lib/useLenis'
-import { ArrowDown, ArrowUpRight } from 'lucide-react'
+import React, { useRef, useEffect, useState } from 'react';
+import { sound } from '../lib/audio';
+import { scrollLenisTo } from '../lib/useLenis';
 
-export default function Hero() {
+const VIDEO_URL =
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4';
+
+interface HeroProps {
+  onBeginJourney?: () => void;
+}
+
+const NAV_ITEMS = [
+  { label: 'Home', id: 'hero', target: '#hero' },
+  { label: 'Studio', id: 'studio', target: '#works' },
+  { label: 'About', id: 'about', target: '#about' },
+  { label: 'Journal', id: 'journal', target: '#skills' },
+  { label: 'Reach Us', id: 'contact', target: '#contact' },
+];
+
+export const Hero: React.FC<HeroProps> = ({ onBeginJourney }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeNav, setActiveNav] = useState('Home');
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Safe autoplay fallback
+      });
+    }
+  }, []);
+
+  const handleNavClick = (item: typeof NAV_ITEMS[0]) => {
+    try {
+      sound.click();
+    } catch {
+      // Safe audio
+    }
+    setActiveNav(item.label);
+
+    if (item.target === '#hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      scrollLenisTo(item.target);
+    }
+  };
+
+  const handleBeginJourney = () => {
+    try {
+      sound.click();
+    } catch {
+      // Safe audio
+    }
+    if (onBeginJourney) {
+      onBeginJourney();
+    } else {
+      scrollLenisTo('#works');
+    }
+  };
+
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full flex flex-col justify-between items-center text-center overflow-hidden pt-28 pb-14 px-6 sm:px-12 select-none bg-gradient-to-b from-[#ebf0f5] via-[#f2f6f9] to-[#ebf1f6]"
+      className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-background select-none"
     >
-      {/* ── AMBIENT CENTER BLUE GLOW ANIMATION (Anchored In Center, No Mouse Tracking) ── */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
-        {/* Layer 1: Core Breathing Cyan-Blue Aura */}
-        <div className="absolute w-[440px] h-[440px] sm:w-[620px] sm:h-[620px] rounded-full bg-gradient-to-tr from-[#38bdf8] via-[#60a5fa] to-[#a5f3fc] opacity-80 blur-[80px] animate-center-glow-pulse animate-center-glow-morph will-change-transform" />
+      {/* ── Fullscreen Video Background ── */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+        src={VIDEO_URL}
+      />
 
-        {/* Layer 2: Radiant Inner Azure Spark Core */}
-        <div className="absolute w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] rounded-full bg-gradient-to-br from-[#0284c7] via-[#38bdf8] to-[#93c5fd] opacity-65 blur-[65px] animate-center-float-2 will-change-transform" />
+      {/* ── Navigation Bar ── */}
+      <header className="relative z-10 w-full">
+        <div className="flex flex-row items-center justify-between px-8 py-6 max-w-7xl mx-auto">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <a
+              href="#hero"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="text-3xl tracking-tight text-foreground select-none inline-flex items-baseline gap-0.5 hover:opacity-90 transition-opacity"
+              style={{ fontFamily: "'Instrument Serif', serif" }}
+            >
+              <span>Velorah</span>
+              <sup className="text-xs font-sans font-normal text-muted-foreground">®</sup>
+            </a>
 
-        {/* Satellite Bubble 1: Floating Top-Left of Center */}
-        <div className="absolute -translate-x-28 -translate-y-24 sm:-translate-x-44 sm:-translate-y-36 w-36 h-36 sm:w-56 sm:h-56 rounded-full bg-gradient-to-br from-[#38bdf8] to-[#0284c7] opacity-65 blur-[42px] animate-center-float-1 will-change-transform" />
+            {/* Subtle portfolio attribution badge */}
+            <span className="hidden sm:inline-block border-l border-white/15 pl-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              Jayaprakash K Portfolio
+            </span>
+          </div>
 
-        {/* Satellite Bubble 2: Floating Bottom-Right of Center */}
-        <div className="absolute translate-x-28 translate-y-24 sm:translate-x-44 sm:translate-y-36 w-40 h-40 sm:w-64 sm:h-64 rounded-full bg-gradient-to-tr from-[#60a5fa] to-[#93c5fd] opacity-75 blur-[48px] animate-center-float-2 will-change-transform" />
+          {/* Nav Links (hidden on mobile, md:flex) */}
+          <nav className="hidden md:flex items-center gap-8">
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeNav === item.label;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleNavClick(item)}
+                  onMouseEnter={() => {
+                    try {
+                      sound.hover();
+                    } catch {
+                      // Safe
+                    }
+                  }}
+                  className={`text-sm transition-colors cursor-pointer ${
+                    isActive
+                      ? 'text-foreground font-medium'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </nav>
 
-        {/* Satellite Bubble 3: Accent Mid-Right Floating Light */}
-        <div className="absolute translate-x-40 translate-y-4 sm:translate-x-60 sm:translate-y-8 w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-[#38bdf8] to-[#a5f3fc] opacity-70 blur-[26px] animate-center-float-3 will-change-transform" />
-      </div>
+          {/* Nav CTA button */}
+          <div>
+            <button
+              type="button"
+              onClick={handleBeginJourney}
+              onMouseEnter={() => {
+                try {
+                  sound.hover();
+                } catch {
+                  // Safe
+                }
+              }}
+              className="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200 cursor-pointer select-none font-medium"
+            >
+              Begin Journey
+            </button>
+          </div>
+        </div>
+      </header>
 
-      {/* Top Header: "W e l c o m e   t o   m y" (Exact match to reference) */}
-      <div className="relative z-10 pt-8 sm:pt-14 pointer-events-none">
-        <p className="font-['Plus_Jakarta_Sans',sans-serif] text-base sm:text-xl md:text-2xl text-[#526b77] tracking-[0.45em] sm:tracking-[0.65em] font-semibold uppercase opacity-95">
-          W e l c o m e &nbsp; t o &nbsp; m y
-        </p>
-      </div>
+      {/* ── Hero Section (centered, text-center) ── */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-32 pb-40 py-[90px] my-auto mx-auto max-w-7xl">
+        {/* Status / Identity Tag */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-8 animate-fade-rise">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="font-mono text-xs uppercase tracking-[0.22em] text-slate-300 font-medium">
+            Jayaprakash K &bull; AI Engineer &bull; Creative Developer
+          </span>
+        </div>
 
-      {/* Centerpiece Hero Title: "Portfolio" (Exact match to reference) */}
-      <div className="relative z-10 my-auto py-6 pointer-events-none">
-        <h1 className="text-7xl sm:text-9xl md:text-[10.5rem] lg:text-[13rem] font-['Plus_Jakarta_Sans',sans-serif] font-bold tracking-tight leading-[0.88] text-[#5e8896]">
-          Portfolio
+        {/* H1 Heading */}
+        <h1
+          className="text-5xl sm:text-7xl md:text-8xl leading-[0.95] tracking-[-2.46px] max-w-7xl font-normal text-foreground animate-fade-rise"
+          style={{ fontFamily: "'Instrument Serif', serif" }}
+        >
+          Where{' '}
+          <em className="not-italic text-muted-foreground">dreams</em>
+          {' '}rise{' '}
+          <em className="not-italic text-muted-foreground">through the silence.</em>
         </h1>
-        <div className="text-xs sm:text-sm font-['IBM_Plex_Mono',monospace] text-[#4d6b79] tracking-[0.3em] uppercase mt-5 font-semibold">
-          JAYAPRAKASH K &bull; AI ENGINEER &bull; CREATIVE DEVELOPER
-        </div>
+
+        {/* Subtext */}
+        <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mt-8 leading-relaxed animate-fade-rise-delay font-body">
+          We're designing tools for deep thinkers, bold creators, and quiet rebels. Amid the
+          chaos, we build digital spaces for sharp focus and inspired work.
+        </p>
+
+        {/* Hero CTA button */}
+        <button
+          type="button"
+          onClick={handleBeginJourney}
+          onMouseEnter={() => {
+            try {
+              sound.hover();
+            } catch {
+              // Safe
+            }
+          }}
+          className="liquid-glass rounded-full px-14 py-5 text-base text-foreground mt-12 hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200 cursor-pointer select-none animate-fade-rise-delay-2 font-medium"
+        >
+          Begin Journey
+        </button>
       </div>
 
-      {/* Bottom Sub-row: Left category, Center CTAs, Right year (Exact match to reference) */}
-      <div className="relative z-10 w-full max-w-6xl pt-8 border-t border-[#526b77]/20 flex flex-col sm:flex-row items-center justify-between gap-6">
-        {/* Bottom Left: Category */}
-        <div className="text-center sm:text-left">
-          <div className="text-xl sm:text-2xl md:text-3xl font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#45616f]">
-            Creative Development
-          </div>
-          <div className="font-['IBM_Plex_Mono',monospace] text-xs text-[#5e7784] mt-1 font-medium">
-            Machine Learning &bull; Computer Vision &bull; 3D WebGL
-          </div>
+      {/* ── Subtle bottom coordinate bar linking to portfolio ── */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-8 pb-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-4 text-muted-foreground text-xs font-mono uppercase tracking-wider">
+        <div>
+          <span className="text-accent-cyan">01 //</span> Machine Learning &bull; Computer Vision &bull; 3D WebGL
         </div>
-
-        {/* Center Pill Action Buttons */}
-        <div className="flex items-center gap-4">
-          <a
-            href="#works"
-            onMouseEnter={() => sound.playHover()}
-            onClick={(e) => {
-              e.preventDefault()
-              sound.playClick()
-              scrollLenisTo('#works')
-            }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#3b5966] text-white hover:bg-[#2c444f] hover:scale-105 transition-all shadow-[0_10px_25px_rgba(59,89,102,0.25)] font-['IBM_Plex_Mono',monospace] text-xs font-semibold uppercase tracking-wider"
-          >
-            <span>explore work</span>
-            <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-          </a>
-          <a
-            href="#contact"
-            onMouseEnter={() => sound.playHover()}
-            onClick={(e) => {
-              e.preventDefault()
-              sound.playClick()
-              scrollLenisTo('#contact')
-            }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/80 backdrop-blur-md border border-[#486572]/30 text-[#3b5966] hover:bg-white hover:scale-105 transition-all shadow-[0_6px_20px_rgba(0,0,0,0.06)] font-['IBM_Plex_Mono',monospace] text-xs font-semibold uppercase tracking-wider"
-          >
-            <span>let’s chat</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
-
-        {/* Bottom Right: 2026 */}
-        <div className="text-center sm:text-right">
-          <div className="text-3xl sm:text-4xl md:text-5xl font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#5e8896]">
-            2026
-          </div>
-          <div className="font-['IBM_Plex_Mono',monospace] text-[11px] text-[#5e7784] mt-1 font-medium">
-            TAMIL NADU, INDIA
-          </div>
+        <div className="text-muted-foreground/80">
+          Tamil Nadu, India &bull; 2026
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default Hero;

@@ -27,29 +27,23 @@ const Process: React.FC = () => {
     <section
       id="process"
       ref={sectionRef}
-      className="section-padding"
-      style={{ backgroundColor: '#f2f6f9' }}
+      className="section-padding relative"
+      style={{ backgroundColor: 'hsl(var(--background))' }}
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="fade-in-up mb-12">
-          <p
-            className="font-mono text-[10px] uppercase tracking-[0.2em] mb-2"
-            style={{ color: '#859ba6' }}
-          >
+          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent-cyan mb-2">
             // Methodology
           </p>
           <h2
-            className="text-3xl sm:text-4xl font-bold"
-            style={{ color: '#45616f' }}
+            className="text-3xl sm:text-4xl md:text-5xl font-normal text-foreground"
+            style={{ fontFamily: "'Instrument Serif', serif" }}
           >
             Engineering Process
           </h2>
-          <p
-            className="mt-4 max-w-2xl text-base leading-relaxed"
-            style={{ color: '#647e8b' }}
-          >
-            From discovery to deployment — a systematic approach to building
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground font-body">
+            From algorithmic discovery to production deployment — a disciplined approach to building
             intelligent, performant systems.
           </p>
         </div>
@@ -59,53 +53,34 @@ const Process: React.FC = () => {
           {processSteps.map((step, i) => (
             <div
               key={step.index}
-              className="fade-in-up glass-card p-6 hover-lift group relative overflow-hidden"
+              className="fade-in-up liquid-glass p-6 hover-lift group relative overflow-hidden rounded-2xl border border-white/10"
               onMouseEnter={() => sound.hover()}
               data-cursor="interactive"
             >
-              {/* Large background index */}
-              <span
-                className="absolute -top-2 -right-2 text-7xl font-black select-none transition-opacity duration-300 group-hover:opacity-[0.12]"
-                style={{ color: 'rgba(56, 189, 248, 0.06)' }}
-              >
+              {/* Large background watermark index */}
+              <span className="absolute -top-2 -right-2 text-7xl font-mono font-black select-none transition-opacity duration-300 opacity-5 group-hover:opacity-15 text-accent-cyan pointer-events-none">
                 {step.index}
               </span>
 
               {/* Index badge */}
-              <div
-                className="inline-block px-2.5 py-1 rounded-full mb-4 font-mono text-[10px] font-semibold"
-                style={{
-                  backgroundColor: 'rgba(56, 189, 248, 0.1)',
-                  color: '#38bdf8',
-                }}
-              >
+              <div className="inline-block px-2.5 py-1 rounded-full mb-4 font-mono text-[10px] font-semibold bg-cyan-400/10 text-accent-cyan border border-cyan-400/20">
                 {step.index}
               </div>
 
-              <h3
-                className="text-base font-bold mb-3 leading-tight"
-                style={{ color: '#45616f' }}
-              >
+              <h3 className="text-base font-semibold mb-3 leading-tight text-white group-hover:text-cyan-300 transition-colors">
                 {step.title}
               </h3>
 
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: '#647e8b' }}
-              >
+              <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
                 {step.description}
               </p>
 
               {/* Bottom progress line */}
-              <div
-                className="mt-5 h-[2px] rounded-full overflow-hidden"
-                style={{ backgroundColor: 'rgba(74, 99, 111, 0.08)' }}
-              >
+              <div className="mt-5 h-[2px] rounded-full overflow-hidden bg-white/10">
                 <div
-                  className="h-full rounded-full transition-all duration-700 group-hover:w-full"
+                  className="h-full rounded-full transition-all duration-700 group-hover:w-full bg-gradient-to-r from-[#38bdf8] to-[#0284c7]"
                   style={{
                     width: `${(i + 1) * 20}%`,
-                    background: 'linear-gradient(90deg, #38bdf8, #0284c7)',
                   }}
                 />
               </div>
